@@ -19,6 +19,10 @@ module Apollo
           sanitizer: sanitizer
         }.delete_if { |_, v| v.nil? })
       end
+
+      def update_sanitizer(sanitizer:, override:false)
+        handle_request("sanitizers/account/#{@account}", :put, params: {override: override}, body: sanitizer)
+      end
     end
   end
 end
