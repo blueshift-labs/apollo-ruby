@@ -121,11 +121,7 @@ module Apollo
     end
 
     def update_account
-      if !@account.nil?
         Apollo.indices.for_account(@account).update_sanitizer(sanitizer: self, override: false)
-      else
-        Apollo.indices.for_account(:default).update_sanitizer(sanitizer: self, override: false)
-      end
     end
 
     def override
