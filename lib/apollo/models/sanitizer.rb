@@ -105,8 +105,13 @@ module Apollo
     end
 
     def fetch
-      if @index.nil?
+      if !@index.nil?
         Apollo.indices.for_index(@index).sanitizer
+      elsif !@account.nil?
+        Apollo.accounts.for_account(@account).sanitizer(
+           type: type,
+           document: document,
+           sanitizer: self)
       else
         Apollo.indices.for_index(:default).sanitizer
       end
@@ -129,14 +134,20 @@ module Apollo
     end
 
     def run_sanitizer(type:, document:)
-      if !@account.nil?
+      if !@index.nil?
+        Apollo.indices.for_index(@index).run_sanitizer(
+          type: type,
+          document: document,
+          sanitizer: self
+        )
+      elsif !@account.nil?
         Apollo.accounts.for_account(@account).run_sanitizer(
           type: type,
           document: document,
           sanitizer: self
         )
       else
-        raise 'missing account'
+        raise 'missing account or index'
       end
     end
   end

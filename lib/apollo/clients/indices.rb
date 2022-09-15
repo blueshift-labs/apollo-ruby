@@ -19,5 +19,12 @@ module Apollo
     def update_sanitizer(sanitizer:, override:false)
       handle_request("sanitizers/#{@index}", :put, params: {override: override}, body: sanitizer)
     end
+
+    def run_sanitizer(type:, document:, sanitizer: nil)
+      handle_request("sanitize/indices/#{@index}/types/#{type}", :get, body: {
+        document: document,
+        sanitizer: sanitizer
+      }.delete_if { |_, v| v.nil? })
+    end
   end
 end
