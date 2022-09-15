@@ -13,6 +13,10 @@ module Apollo
         @account = account
       end
 
+      def sanitizer
+        handle_request("sanitizers/account/#{@account}", :get)
+      end
+
       def run_sanitizer(type:, document:, sanitizer: nil)
         handle_request("sanitize/accounts/#{@account}/types/#{type}", :get, body: {
           document: document,

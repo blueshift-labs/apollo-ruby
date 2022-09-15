@@ -105,8 +105,13 @@ module Apollo
     end
 
     def fetch
-      if @index.nil?
+      if !@index.nil?
         Apollo.indices.for_index(@index).sanitizer
+      elsif !@account.nil?
+        Apollo.accounts.for_account(@account).sanitizer(
+           type: type,
+           document: document,
+           sanitizer: self)
       else
         Apollo.indices.for_index(:default).sanitizer
       end
