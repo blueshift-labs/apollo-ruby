@@ -113,27 +113,27 @@ module Apollo
            document: document,
            sanitizer: self)
       else
-        Apollo.indices.for_index(:default).sanitizer
+        raise 'missing account or index'
       end
     end
 
     def update
       if !@index.nil?
         Apollo.indices.for_index(@index).update_sanitizer(sanitizer: self, override: false)
+      elsif !@account.nil?
+        Apollo.indices.for_account(@index).update_sanitizer(sanitizer: self, override: false)
       else
-        Apollo.indices.for_index(:default).update_sanitizer(sanitizer: self, override: false)
+        raise 'missing account or index'
       end
-    end
-
-    def update_account
-        Apollo.indices.for_account(@account).update_sanitizer(sanitizer: self, override: false)
     end
 
     def override
       if !@index.nil?
         Apollo.indices.for_index(@index).update_sanitizer(sanitizer: self, override: true)
+      elsif !@account.nil?
+        Apollo.indices.for_account(@index).update_sanitizer(sanitizer: self, override: true)
       else
-        Apollo.indices.for_index(:default).update_sanitizer(sanitizer: self, override: true)
+        raise 'missing account or index'
       end
     end
 
