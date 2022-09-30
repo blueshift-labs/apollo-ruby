@@ -43,5 +43,9 @@ module Apollo
         # Models
         require "apollo/models/base_model"
         require "apollo/models/sanitizer"
+
+        # Helper
+        require "apollo/helpers"
+
     end
 end
