@@ -108,10 +108,7 @@ module Apollo
       if !@index.nil?
         Apollo.indices.for_index(@index).sanitizer
       elsif !@account.nil?
-        Apollo.accounts.for_account(@account).sanitizer(
-           type: type,
-           document: document,
-           sanitizer: self)
+        Apollo.accounts.for_account(@account).sanitizer
       else
         raise 'missing account or index'
       end
