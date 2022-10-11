@@ -43,6 +43,7 @@ module Apollo
         # Models
         require "apollo/models/base_model"
         require "apollo/models/sanitizer"
+        require "apollo/models/key"
 
         # Helper
         require "apollo/helpers"
