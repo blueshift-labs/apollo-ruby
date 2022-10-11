@@ -118,7 +118,7 @@ module Apollo
       if !@index.nil?
         Apollo.indices.for_index(@index).update_sanitizer(sanitizer: self, override: false)
       elsif !@account.nil?
-        Apollo.indices.for_account(@index).update_sanitizer(sanitizer: self, override: false)
+        Apollo.indices.for_account(@account).update_sanitizer(sanitizer: self, override: false)
       else
         raise 'missing account or index'
       end
@@ -128,7 +128,7 @@ module Apollo
       if !@index.nil?
         Apollo.indices.for_index(@index).update_sanitizer(sanitizer: self, override: true)
       elsif !@account.nil?
-        Apollo.indices.for_account(@index).update_sanitizer(sanitizer: self, override: true)
+        Apollo.indices.for_account(@account).update_sanitizer(sanitizer: self, override: true)
       else
         raise 'missing account or index'
       end
