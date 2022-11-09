@@ -29,7 +29,7 @@ module Apollo
       end
 
       def get_mapping
-        handle_request("mappings/account/#{@account}", :get)
+        handle_request("mappings/accounts/#{@account}", :get)
       end
     end
   end
