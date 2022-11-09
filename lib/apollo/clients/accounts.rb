@@ -27,6 +27,10 @@ module Apollo
       def update_sanitizer(sanitizer:, override:false)
         handle_request("sanitizers/account/#{@account}", :put, params: {override: override}, body: sanitizer)
       end
+
+      def get_mapping
+        handle_request("mappings/accounts/#{@account}", :get)
+      end
     end
   end
 end
