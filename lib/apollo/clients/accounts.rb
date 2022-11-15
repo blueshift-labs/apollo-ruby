@@ -28,8 +28,8 @@ module Apollo
         handle_request("sanitizers/account/#{@account}", :put, params: {override: override}, body: sanitizer)
       end
 
-      def get_mapping
-        handle_request("mappings/accounts/#{@account}", :get)
+      def get_mapping(doc_type:)
+        handle_request("mappings/accounts/#{@account}/#{doc_type}", :get)
       end
     end
   end
