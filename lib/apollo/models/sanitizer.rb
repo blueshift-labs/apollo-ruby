@@ -18,7 +18,7 @@ module Apollo
       self
     end
 
-    def underscore_key(type:nil, default:nil, key:nil, value:nil)
+    def underscore_key(type: nil, default: nil, key: nil, value: nil)
       if type.nil?
         self.set([:default_underscore_keys, :default], default)
         self.set([:default_underscore_keys, :keys, key], value)
@@ -30,7 +30,7 @@ module Apollo
       self
     end
 
-    def downcase_key(type:nil, default:nil, key:nil, value:nil)
+    def downcase_key(type: nil, default: nil, key: nil, value: nil)
       if type.nil?
         self.set([:default_downcase_keys, :default], default)
         self.set([:default_downcase_keys, :keys, key], value)
@@ -42,7 +42,7 @@ module Apollo
       self
     end
 
-    def max_key_len(type:nil, default:nil, key:nil, value:nil)
+    def max_key_len(type: nil, default: nil, key: nil, value: nil)
       if type.nil?
         self.set([:default_max_key_lens, :default], default)
         self.set([:default_max_key_lens, :keys, key], value)
@@ -54,7 +54,7 @@ module Apollo
       self
     end
 
-    def downcase_value(type:nil, default:nil, key:nil, value:nil)
+    def downcase_value(type: nil, default: nil, key: nil, value: nil)
       if type.nil?
         self.set([:default_downcase_values, :default], default)
         self.set([:default_downcase_values, :keys, key], value)
@@ -66,7 +66,7 @@ module Apollo
       self
     end
 
-    def max_value_len(type:nil, default:nil, key:nil, value:nil)
+    def max_value_len(type: nil, default: nil, key: nil, value: nil)
       if type.nil?
         self.set([:default_max_value_lens, :default], default)
         self.set([:default_max_value_lens, :keys, key], value)
@@ -78,7 +78,7 @@ module Apollo
       self
     end
 
-    def rename(type:nil, key:nil, value:nil)
+    def rename(type: nil, key: nil, value: nil)
       if type.nil?
         self.set([:default_renames, key], value)
       else
@@ -88,7 +88,7 @@ module Apollo
       self
     end
 
-    def blacklist(type:nil, key:nil)
+    def blacklist(type: nil, key: nil)
       if type.nil?
         self.set([:default_blacklist], [key].flatten)
       else
@@ -98,8 +98,15 @@ module Apollo
       self
     end
 
-    def type_mapping(key:nil, value:nil)
+    def type_mapping(key: nil, value: nil)
       self.set([:type_mappings, key], value)
+
+      self
+    end
+
+    def update_default_ttl(type, value)
+      updatedTTL = { type => { "default_ttl" => value } }
+      self.set(:ttl_rules, updatedTTL)
 
       self
     end
