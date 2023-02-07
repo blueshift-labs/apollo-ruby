@@ -106,9 +106,8 @@ module Apollo
 
     def update_default_ttl(type, value)
       if value.match?(/\A\d{1,3}d\z/) && %w[useractions events product_events].include?(type)
-        current_ttl_rules = self.get(:ttl_rules) || {}
         updated_ttl = { type => { "default_ttl" => value } }
-        self.set(:ttl_rules, current_ttl_rules.merge(updated_ttl))
+        self.set(:ttl_rules, updated_ttl)
         self
       else
         raise ArgumentError, "invalid value or type. Value should be in the format '[1-3]d' and type should be one of 'useractions', 'events' or 'product_events'"
