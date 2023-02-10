@@ -117,9 +117,9 @@ module Apollo
 
     def fetch(include_defaults: false)
       if !@index.nil?
-        Apollo.indices.for_index(@index).sanitizer(include_defaults)
+        Apollo.indices.for_index(@index).sanitizer(include_defaults: include_defaults)
       elsif !@account.nil?
-        Apollo.accounts.for_account(@account).sanitizer(include_defaults)
+        Apollo.accounts.for_account(@account).sanitizer(include_defaults: include_defaults)
       else
         raise 'missing account or index'
       end
