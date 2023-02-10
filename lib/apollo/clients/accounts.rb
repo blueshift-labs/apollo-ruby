@@ -13,8 +13,12 @@ module Apollo
         @account = account
       end
 
-      def sanitizer
-        handle_request("sanitizers/account/#{@account}", :get)
+      def sanitizer(include_defaults: false)
+        if include_defaults
+          handle_request("sanitizers/account/#{@account}", :get, params: { include_defaults: true })
+        else
+          handle_request("sanitizers/account/#{@account}", :get)
+        end
       end
 
       def run_sanitizer(type:, document:, sanitizer: nil)
@@ -24,8 +28,8 @@ module Apollo
         }.delete_if { |_, v| v.nil? })
       end
 
-      def update_sanitizer(sanitizer:, override:false)
-        handle_request("sanitizers/account/#{@account}", :put, params: {override: override}, body: sanitizer)
+      def update_sanitizer(sanitizer:, override: false)
+        handle_request("sanitizers/account/#{@account}", :put, params: { override: override }, body: sanitizer)
       end
 
       def get_mapping(doc_type:)

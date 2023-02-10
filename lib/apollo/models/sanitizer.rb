@@ -108,18 +108,18 @@ module Apollo
       if value.match?(/\A\d{1,3}d\z/) && %w[useractions events product_events].include?(type)
         updated_ttl = { "default_ttl" => value }
         self.set([:ttl_rules, type], updated_ttl)
-        
+
         self
       else
         raise ArgumentError, "invalid value or type. Value should be in the format '[1-3]d' and type should be one of 'useractions', 'events' or 'product_events'"
       end
     end
 
-    def fetch
+    def fetch(include_defaults: false)
       if !@index.nil?
-        Apollo.indices.for_index(@index).sanitizer
+        Apollo.indices.for_index(@index).sanitizer(include_defaults)
       elsif !@account.nil?
-        Apollo.accounts.for_account(@account).sanitizer
+        Apollo.accounts.for_account(@account).sanitizer(include_defaults)
       else
         raise 'missing account or index'
       end

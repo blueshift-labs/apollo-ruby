@@ -1,5 +1,7 @@
 module Apollo
-  def self.indices; Indices.new; end
+  def self.indices
+    Indices.new;
+  end
 
   class Indices < BaseClient
     def for_index(index)
@@ -12,12 +14,16 @@ module Apollo
       @index = index
     end
 
-    def sanitizer
-      handle_request("sanitizers/#{@index}", :get)
+    def sanitizer(include_defaults: false)
+      if include_defaults
+        handle_request("sanitizers/#{@index}", :get, params: { include_defaults: true })
+      else
+        handle_request("sanitizers/#{@index}", :get)
+      end
     end
 
-    def update_sanitizer(sanitizer:, override:false)
-      handle_request("sanitizers/#{@index}", :put, params: {override: override}, body: sanitizer)
+    def update_sanitizer(sanitizer:, override: false)
+      handle_request("sanitizers/#{@index}", :put, params: { override: override }, body: sanitizer)
     end
 
     def run_sanitizer(type:, document:, sanitizer: nil)
