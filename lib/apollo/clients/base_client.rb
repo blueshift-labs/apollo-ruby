@@ -57,7 +57,7 @@ module Apollo
       [body, result.headers]
     end
 
-    def handle_results(result)
+    def handle_result(result)
       if result.status >= 200 && result.status < 300 || result.status == 404
         JSON.load(result.body)
       else
