@@ -27,9 +27,9 @@ module Apollo
         @connection = ConnectionPool::Wrapper.new(size: @options.pool || 32, timeout: @options.timeout || 10) do
             connection = Faraday.new(:url => @options.host + ":#{@options.port|| 80}") do |builder|
                 if @options.log_faraday_responses
-                builder.use Faraday::Response::Logger, @options.logger || :logger
+                builder.adapter Faraday::Response::Logger, @options.logger || :logger
                 end
-                builder.use Faraday::Adapter::Typhoeus
+                builder.adapter Faraday::Adapter::Typhoeus
             end
             connection.path_prefix = "/api/v1"
             connection
