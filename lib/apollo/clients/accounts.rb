@@ -35,6 +35,10 @@ module Apollo
       def get_mapping(doc_type:)
         handle_request("mappings/accounts/#{@account}/#{doc_type}", :get)
       end
+
+      def get_dictionary(doc_type:)
+        handle_request("dictionary/#{@account}/#{doc_type}", :get)
+      end
     end
   end
 end
