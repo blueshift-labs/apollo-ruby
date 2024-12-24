@@ -39,6 +39,10 @@ module Apollo
       def get_dictionary(doc_type:)
         handle_request("dictionary/#{@account}/#{doc_type}", :get)
       end
+
+      def update_description(doc_type:, field:, description:)
+        handle_request("dictionary/#{@account}/#{doc_type}/description", :put, body: {"field": field, "description": description})
+      end
     end
   end
 end
