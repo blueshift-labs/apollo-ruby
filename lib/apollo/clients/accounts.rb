@@ -41,8 +41,13 @@ module Apollo
       end
 
       def update_description(doc_type:, field:, description:)
-        handle_request("dictionary/#{@account}/#{doc_type}/description", :put, body: {"field": field, "description": description})
+        handle_request("dictionary/#{@account}/#{doc_type}/description", :put, body: { "field": field, "description": description })
+      end
+
+      def get_autocomplete(doc_type:, path:, size:)
+        handle_request("schema/values/#{@account}/types/#{doc_type}", :get, params: { path: path, size: size })
       end
     end
   end
 end
+``
