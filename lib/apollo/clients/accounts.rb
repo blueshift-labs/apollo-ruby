@@ -40,8 +40,8 @@ module Apollo
         handle_request("dictionary/#{@account}/#{doc_type}", :get)
       end
 
-      def fetch_associated_events(field:)
-        handle_request("dictionary/#{@account}/#{field}/associated-events", :get)
+      def fetch_associated_events(fields:)
+        handle_request("dictionary/#{@account}/associated-events", :post, body: { fields: fields })
       end
 
       def update_description(doc_type:, field:, description:)
