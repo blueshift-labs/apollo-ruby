@@ -36,8 +36,16 @@ module Apollo
         handle_request("mappings/accounts/#{@account}/#{doc_type}", :get)
       end
 
-      def get_dictionary(doc_type:)
-        handle_request("dictionary/#{@account}/#{doc_type}", :get)
+      def get_dictionary(doc_type:, fetch_all_standard_attributes: nil)
+        if fetch_all_standard_attributes.nil?
+          handle_request("dictionary/#{@account}/#{doc_type}", :get)
+        else
+          handle_request(
+            "dictionary/#{@account}/#{doc_type}",
+            :get,
+            params: { fetch_all_standard_attributes: fetch_all_standard_attributes }
+          )
+        end
       end
 
       def fetch_associated_events(fields:)
